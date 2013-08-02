@@ -32,7 +32,8 @@
 			<th>Price</th>
 			<th>Category</th>
 			<th>Published Date</th>
-			<th>Amount Left/Purchased</th>
+			<th>Amount Left</th>
+			<th>Purchased</th>
 			<th>Operations</th>
 		</tr>
 	</thead>
@@ -40,9 +41,9 @@
 	<tfoot>
 		<?php if ($this->auth->has_permission('Incentive.Content.Delete')) : ?>
 		<tr>
-			<td colspan="10"><?php echo lang('bf_with_selected') ?> <input
+			<td colspan="10"> <input
 				type="submit" name="delete" id="delete-me" class="btn btn-danger"
-				value="<?php echo lang('bf_action_delete') ?>"
+				value="Delete selected"
 				onclick="return confirm('<?php echo lang('incentive_delete_confirm'); ?>')">
 			</td>
 		</tr>
@@ -66,8 +67,8 @@
 			<td>Gift Card <!-- need a category pool  -->
 			</td>
 			<td><?= $record->created_on ?></td>
-			<td><?= $record->incentive_amount_left ?>/<?= $record->incentive_amount_purchased ?>
-			</td>
+			<td><?= $record->incentive_amount_left ?></td>
+			<td><?= $record->incentive_amount_purchased ?></td>
 			<td><?php echo anchor('incentive/company/edit/'. $record->id,'edit', 'class="btn btn-info"') ?>
 			</td>
 		</tr>

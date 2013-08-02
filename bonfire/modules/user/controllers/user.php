@@ -23,11 +23,7 @@ class user extends Front_Controller {
 	*/
 	public function index()
 	{
-		$records = $this->load->model('video/video_model')->find_all();
-		Template::set('records', $records);
-		Template::set('toolbar_title', 'Userview');
-		Template::set_theme('two_column');
-		Template::render();
+		Template::redirect('user/user_user/video_charts');
 	}
 
 	public function view($id = false)
@@ -51,7 +47,7 @@ class user extends Front_Controller {
 		Template::set('toolbar_title', 'Userview');
 		Template::set('id',$id);
 		Template::set_theme('two_column');
-		Template:: render();
+		Template:: render('user_index');
 	}
 
 
@@ -62,6 +58,13 @@ class user extends Front_Controller {
 		$records['records'] = $this->comment_model->find_all();
 		$this->load->view('content/save_data',$records);
 	}
-
+	
+	public function show_random_video(){
+		
+		$result=$this->load->model('video/video_model')->get_random_video();
+		//console::log($result);
+		if($result===false) Template::redirect('/');
+		Template::redirect('/user/view/'.$result[0]->id);
+	}
 
 }
