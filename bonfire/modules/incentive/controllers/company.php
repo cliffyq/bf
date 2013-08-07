@@ -184,7 +184,8 @@ class company extends  Admin_Controller {
 				$result = FALSE;
 				foreach ($checked as $pid)
 				{
-					if($this->delete_incentive_image($pid)) $result = $this->incentive_model->delete($pid);
+					$this->delete_incentive_image($pid); 
+					$result = $this->incentive_model->delete($pid);
 				}
 
 				if ($result)
@@ -354,7 +355,7 @@ class company extends  Admin_Controller {
 	{
 		//$this->load->helper('file');
 		$data=$this->incentive_model->find($id,1);
-		if(!isset($data['incentive_image_path'])&& ($data['incentive_image_path']==NULL)) return FALSE;
+		if(!isset($data['incentive_image_path'])|| ($data['incentive_image_path']==NULL)) return FALSE;
 		$delete_file=$this->load->module('incentive/commonauth')->get_incentive_image($data['incentive_image_path']);
 		if($delete_file==NULL) return FALSE;
 		return unlink($delete_file);

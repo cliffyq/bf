@@ -210,6 +210,15 @@ class user extends Admin_Controller {
 
 		return $return;
 	}
+	
+	function ordertime()
+	{
+		$this->load->model('video/video_model');
+		$this->video_model->order_by('created_on','desc');
+	 	$result=$this->video_model->find_all();
+		 Template::set('records', $result);
+		Template::render();
+	}
 
 	//--------------------------------------------------------------------
 
